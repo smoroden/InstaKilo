@@ -23,6 +23,7 @@
 @property (nonatomic) NSDictionary *sortedPhotos;
 @property (nonatomic) NSArray *keys;
 
+@property (nonatomic) NSIndexPath *startIndexPath;
 
 @end
 
@@ -47,10 +48,11 @@
 }
 - (IBAction)panning:(UIPanGestureRecognizer *)sender {
     CGPoint point = [sender locationInView:self.collectionView];
-    
+    NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:point];
     switch (sender.state) {
         case UIGestureRecognizerStateBegan:
-            [self.collectionView beginInteractiveMovementForItemAtIndexPath:[self.collectionView indexPathForItemAtPoint:point]];
+            self.startIndexPath = indexPath;
+            [self.collectionView beginInteractiveMovementForItemAtIndexPath:indexPath];
             break;
         case UIGestureRecognizerStateChanged:
             [self.collectionView updateInteractiveMovementTargetPosition:point];
@@ -58,6 +60,11 @@
             
         case UIGestureRecognizerStateEnded:
         case UIGestureRecognizerStateCancelled:
+//            if (self.startIndexPath.section != indexPath.section) {
+//                [self.collectionView cancelInteractiveMovement];
+//            } else {
+//                [self.collectionView endInteractiveMovement];
+//            }
             [self.collectionView endInteractiveMovement];
             break;
         default:
@@ -118,6 +125,10 @@
     
     
     
+}
+
+-(BOOL)collectionView:(UICollectionView *)collectionView canMoveItemAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
