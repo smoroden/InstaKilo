@@ -20,6 +20,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sXL-MN-sOr">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="t0u-gw-yl2">
                                     <size key="itemSize" width="150" height="150"/>
                                     <size key="headerReferenceSize" width="50" height="50"/>
@@ -74,6 +75,7 @@
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="BrP-6N-zXe"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="zbc-9S-y3n"/>
+                                    <outletCollection property="gestureRecognizers" destination="aw3-yP-HFH" appends="YES" id="HGd-7c-Bbm"/>
                                 </connections>
                             </collectionView>
                         </subviews>
@@ -114,6 +116,11 @@
                         <action selector="doubleTap:" destination="BYZ-38-t0r" id="FEw-XT-9WK"/>
                     </connections>
                 </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="2" maximumNumberOfTouches="2" id="aw3-yP-HFH">
+                    <connections>
+                        <action selector="panning:" destination="BYZ-38-t0r" id="FeU-t0-mIU"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1152" y="389"/>
         </scene>

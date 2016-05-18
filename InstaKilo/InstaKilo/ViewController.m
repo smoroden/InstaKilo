@@ -38,8 +38,32 @@
     
     self.sortedLocation = self.sortValue.selectedSegmentIndex;
     
+    
+    
+    
+    
     [self refreshData];
 
+}
+- (IBAction)panning:(UIPanGestureRecognizer *)sender {
+    CGPoint point = [sender locationInView:self.collectionView];
+    
+    switch (sender.state) {
+        case UIGestureRecognizerStateBegan:
+            [self.collectionView beginInteractiveMovementForItemAtIndexPath:[self.collectionView indexPathForItemAtPoint:point]];
+            break;
+        case UIGestureRecognizerStateChanged:
+            [self.collectionView updateInteractiveMovementTargetPosition:point];
+            break;
+            
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateCancelled:
+            [self.collectionView endInteractiveMovement];
+            break;
+        default:
+            break;
+    }
+    
 }
 - (IBAction)sortChanged:(UISegmentedControl *)sender {
     self.sortedLocation = sender.selectedSegmentIndex;
@@ -92,6 +116,21 @@
     
     return cell;
     
+    
+    
+}
+
+-(void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    Photo *temp = self.sortedPhotos[self.keys[sourceIndexPath.section]][sourceIndexPath.row];
+    
+    //[self.data.photos removeObject:temp];
+    
+    [self.sortedPhotos[self.keys[sourceIndexPath.section]] removeObject:temp];
+    
+    NSMutableArray *a = self.sortedPhotos[self.keys[sourceIndexPath.section]];
+    [a removeObject:temp];
+    [a insertObject:temp atIndex:destinationIndexPath.row];
+    //self.sortedPhotos[self.keys[sourceIndexPath.section]]
     
 }
 
