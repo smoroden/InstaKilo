@@ -14,6 +14,9 @@
 		586654931CECDCAB00F4BFE5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 586654921CECDCAB00F4BFE5 /* Assets.xcassets */; };
 		586654961CECDCAB00F4BFE5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 586654941CECDCAB00F4BFE5 /* LaunchScreen.storyboard */; };
 		586654AB1CECDE7500F4BFE5 /* PhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 586654AA1CECDE7500F4BFE5 /* PhotoCollectionViewCell.m */; };
+		586654B71CECE1BA00F4BFE5 /* SubjectHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 586654B61CECE1BA00F4BFE5 /* SubjectHeaderView.m */; };
+		586654BA1CECE27200F4BFE5 /* Photos.m in Sources */ = {isa = PBXBuildFile; fileRef = 586654B91CECE27200F4BFE5 /* Photos.m */; };
+		586654BD1CECE9B100F4BFE5 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 586654BC1CECE9B100F4BFE5 /* Photo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +32,12 @@
 		586654971CECDCAB00F4BFE5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		586654A91CECDE7500F4BFE5 /* PhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCollectionViewCell.h; sourceTree = "<group>"; };
 		586654AA1CECDE7500F4BFE5 /* PhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCollectionViewCell.m; sourceTree = "<group>"; };
+		586654B51CECE1BA00F4BFE5 /* SubjectHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubjectHeaderView.h; sourceTree = "<group>"; };
+		586654B61CECE1BA00F4BFE5 /* SubjectHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubjectHeaderView.m; sourceTree = "<group>"; };
+		586654B81CECE27200F4BFE5 /* Photos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photos.h; sourceTree = "<group>"; };
+		586654B91CECE27200F4BFE5 /* Photos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photos.m; sourceTree = "<group>"; };
+		586654BB1CECE9B100F4BFE5 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		586654BC1CECE9B100F4BFE5 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +81,12 @@
 				586654941CECDCAB00F4BFE5 /* LaunchScreen.storyboard */,
 				586654971CECDCAB00F4BFE5 /* Info.plist */,
 				586654861CECDCAB00F4BFE5 /* Supporting Files */,
+				586654B51CECE1BA00F4BFE5 /* SubjectHeaderView.h */,
+				586654B61CECE1BA00F4BFE5 /* SubjectHeaderView.m */,
+				586654B81CECE27200F4BFE5 /* Photos.h */,
+				586654B91CECE27200F4BFE5 /* Photos.m */,
+				586654BB1CECE9B100F4BFE5 /* Photo.h */,
+				586654BC1CECE9B100F4BFE5 /* Photo.m */,
 			);
 			path = InstaKilo;
 			sourceTree = "<group>";
@@ -154,10 +169,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				586654BD1CECE9B100F4BFE5 /* Photo.m in Sources */,
 				5866548E1CECDCAB00F4BFE5 /* ViewController.m in Sources */,
 				586654AB1CECDE7500F4BFE5 /* PhotoCollectionViewCell.m in Sources */,
 				5866548B1CECDCAB00F4BFE5 /* AppDelegate.m in Sources */,
 				586654881CECDCAB00F4BFE5 /* main.m in Sources */,
+				586654BA1CECE27200F4BFE5 /* Photos.m in Sources */,
+				586654B71CECE1BA00F4BFE5 /* SubjectHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

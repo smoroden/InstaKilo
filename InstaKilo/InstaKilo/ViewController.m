@@ -8,10 +8,21 @@
 
 #import "ViewController.h"
 #import "PhotoCollectionViewCell.h"
+#import "Photos.h"
+#import "SubjectHeaderView.h"
+#import "Photo.h"
 
 @interface ViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
-@property (nonatomic) NSMutableArray *data;
+@property (nonatomic) Photos *data;
+
+@property (nonatomic) BOOL sortedLocation;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *sortValue;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
+@property (nonatomic) NSDictionary *sortedPhotos;
+@property (nonatomic) NSArray *keys;
+
 
 @end
 
@@ -21,31 +32,87 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.data = [@[] mutableCopy];
+    self.data = [Photos premadePhotoSet];
     
-    for (int i = 0; i < 10; i++) {
-        [self.data addObject:[UIImage imageNamed:[NSString stringWithFormat:@"img%d", i]]];
-    }
+    NSLog(@"%@", self.data.byLocation);
+    
+    self.sortedLocation = self.sortValue.selectedSegmentIndex;
+    
+    [self refreshData];
+
+}
+- (IBAction)sortChanged:(UISegmentedControl *)sender {
+    self.sortedLocation = sender.selectedSegmentIndex;
+    
+    [self refreshData];
 }
 
+-(void)refreshData {
+    
+    if(self.sortedLocation) {
+        self.sortedPhotos = [self.data byLocation];
+    } else {
+        self.sortedPhotos = [self.data bySubject];
+    }
+
+    self.keys = self.sortedPhotos.allKeys;
+    
+    [self.collectionView reloadData];
+}
+
+- (IBAction)doubleTap:(UITapGestureRecognizer *)sender {
+    CGPoint point = [sender locationInView:self.collectionView];
+    
+    //NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:point];
+    
+    [self removeCellAtIndexPath:[self.collectionView indexPathForItemAtPoint:point]];
+    
+}
 #pragma uicollectionview data/delegate
 
-
+-(void)removeCellAtIndexPath:(NSIndexPath *)indexPath {
+    Photo *photo = self.sortedPhotos[self.keys[indexPath.section]][indexPath.row];
+    
+    //NSLog(@"Before delete: %@", a);
+    [self.data.photos removeObject:photo];
+ //   [self.sortedPhotos[self.keys[indexPath.section]] removeObjectAtIndex:indexPath.row];
+    //NSLog(@"after delete: %@", a);
+    [self refreshData];
+}
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photoCell" forIndexPath:indexPath];
     
-    cell.imageView.image = self.data[indexPath.row];
+    //cell.imageView.image = self.data.photoSets[indexPath.section][indexPath.row];
     
+    
+    Photo *photo = self.sortedPhotos[self.keys[indexPath.section]][indexPath.row];
+    
+    cell.imageView.image = photo.image;
     
     return cell;
     
     
 }
 
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    SubjectHeaderView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"subjectHeader" forIndexPath:indexPath];
     
-    return self.data.count;
+    header.subjectLabel.text = self.keys[indexPath.section];
+    
+    return header;
+}
+
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    
+    
+    return self.keys.count;
+}
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    NSArray *photos = self.sortedPhotos[self.keys[section]];
+    
+    return photos.count;
 }
 
 @end
